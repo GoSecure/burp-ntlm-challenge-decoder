@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'net.portswigger.burp.extender:burp-extender-api:1.7.22'
+}

@@ -22,7 +22,7 @@ import java.util.LinkedHashMap;
 import javax.xml.bind.DatatypeConverter;
 
 
-public class BurpExtender implements IBurpExtender, IMessageEditorTabFactory, ITab
+public class BurpExtender implements IBurpExtender, IMessageEditorTabFactory
 {
 
     private IBurpExtenderCallbacks callbacks;
@@ -30,49 +30,16 @@ public class BurpExtender implements IBurpExtender, IMessageEditorTabFactory, IT
     private JPanel mainPane;
     final JTextArea SSPTextArea = new JTextArea(5, 10);
 
-    
-    public void registerExtenderCallbacks (IBurpExtenderCallbacks callbacks) 
+
+    public void registerExtenderCallbacks (IBurpExtenderCallbacks callbacks)
     {
         this.callbacks = callbacks;
 
         helpers = callbacks.getHelpers();
 
-	callbacks.setExtensionName("NTLM SSP Decoder");
-
+	    callbacks.setExtensionName("NTLM SSP Decoder");
 
         callbacks.registerMessageEditorTabFactory(this);
-
-
-        // create our UI
-	SwingUtilities.invokeLater(new Runnable() {
-		@Override
-		public void run() {
-		    //Main split pane
-		    mainPane = new JPanel(new BorderLayout());
-
-
-		    SSPTextArea.setLineWrap(true);
-		    JPanel beautifyTextWrapper = new JPanel(new BorderLayout());
-		    JScrollPane beautifyScrollPane = new JScrollPane(SSPTextArea);
-		    beautifyTextWrapper.add(beautifyScrollPane, BorderLayout.CENTER);
-		    mainPane.add(beautifyTextWrapper, BorderLayout.CENTER);
-
-
-
-		    callbacks.customizeUiComponent(mainPane);
-
-		    // Add the custom tab to Burp's UI
-		    callbacks.addSuiteTab(BurpExtender.this);
-		    
-		}
-		            
-	    });
-
-
-
-
-
-
 
     }
 
@@ -81,36 +48,25 @@ public class BurpExtender implements IBurpExtender, IMessageEditorTabFactory, IT
     public IMessageEditorTab createNewInstance(IMessageEditorController controller, boolean editable) {
 	// create a new instance of our custom decoder tab
 	return new SSPDecoderTab(controller, editable);
-    }    
-
-    @Override
-    public String getTabCaption() {
-	return "SSP Decoder";
     }
-
-    @Override
-    public Component getUiComponent() {
-	return mainPane;
-    }
-
 
 
     class SSPDecoderTab implements IMessageEditorTab {
-	
-	private boolean editable;
-	private ITextEditor txtInput;
-	private byte[] currentMessage;
-	private String SSPHeaderValue;
-	Map<String, String> headers;
 
-	
+		private boolean editable;
+		private ITextEditor txtInput;
+		private byte[] currentMessage;
+		private String SSPHeaderValue;
+		Map<String, String> headers;
+
+
         public SSPDecoderTab(IMessageEditorController controller, boolean editable) {
 	    this.editable = editable;
 
 	    // create an instance of Burp's text editor, to display our deserialized data
 	    txtInput = callbacks.createTextEditor();
 	    txtInput.setEditable(editable);
-	            
+
 	}
 
 	@Override
@@ -156,12 +112,12 @@ public class BurpExtender implements IBurpExtender, IMessageEditorTabFactory, IT
 		for (Map.Entry<String, String> line : outputMap.entrySet()) {
 			outputString += line.getKey() + ": " + line.getValue() + "\n";
 		}
-	    
+
 	    txtInput.setText(outputString.getBytes());
 	}
 
 	// called when checking if we enable the tab
-	private String getSSPHeaderValue(List<String> headers, String headerKey) {   
+	private String getSSPHeaderValue(List<String> headers, String headerKey) {
 	    String headerValue = "";
 	    for (String headerLine : headers) {
 		String[] headerArray = headerLine.split("\\s*:\\s*");
