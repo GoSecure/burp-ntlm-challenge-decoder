@@ -34,10 +34,10 @@ class SSPDecoderTab(val controller: IMessageEditorController, private val editab
 
         if (isRequest) {
             val httpInfo = helpers.analyzeRequest(content)
-            this.sspHeaderValue = getSSPHeaderValue(httpInfo.headers, "Authorization")
+            this.sspHeaderValue = httpInfo.getHeader("Authorization")
         } else {
             val httpInfo = helpers.analyzeResponse(content)
-            this.sspHeaderValue = getSSPHeaderValue(httpInfo.headers, "WWW-Authenticate")
+            this.sspHeaderValue = httpInfo.getHeader("WWW-Authenticate")
         }
 
         if (this.sspHeaderValue != "")
@@ -59,35 +59,6 @@ class SSPDecoderTab(val controller: IMessageEditorController, private val editab
         }
 
         txtInput.text = outputString.toString().toByteArray()
-    }
-
-    // called when checking if we enable the tab
-    private fun getSSPHeaderValue(headers: List<String>, headerKey: String): String {
-        var headerValue = ""
-        for (headerLine in headers) {
-            val headerArray = headerLine.split("\\s*:\\s*".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
-            // is it a `Key: value' header?
-            if (headerArray.size > 1) {
-
-                // are we looking for this key?
-                if (headerKey == headerArray[0]) {
-                    val authorizationTokens = headerArray[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
-                    // Are there two token?
-                    if (authorizationTokens.size == 2) {
-
-                        // is the 1st token a NTLM marker?
-                        if (authorizationTokens[0] == "NTLM") {
-
-                            // assume 2nd token is NTLM blob
-                            headerValue = authorizationTokens[1]
-                        }
-                    }
-                }
-            }
-        }
-        return headerValue
     }
 
     override fun getMessage(): ByteArray? {
