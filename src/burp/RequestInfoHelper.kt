@@ -11,7 +11,7 @@ fun IRequestInfo.getHeader(headerKey:String):String = getHeaderCommon(headerKey,
 internal fun getHeaderCommon(headerKey:String,headers: List<String>):String {
     var headerValue = ""
     for (headerLine in headers) {
-        val headerArray = headerLine.split("\\s*:\\s*".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+        val headerArray = headerLine.split("\\s*:\\s*".toRegex(),2).dropLastWhile { it.isEmpty() }.toTypedArray()
 
         // is it a `Key: value' header?
         if (headerArray.size > 1) {

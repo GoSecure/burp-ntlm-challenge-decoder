@@ -2,9 +2,9 @@ package burp.messages
 
 import java.util.HashMap
 
-abstract class SSPMessage(internal var raw: ByteArray) {
-    internal var valid: Boolean = false
-    internal var version: ByteArray? = null
+abstract class SSPMessage(var raw: ByteArray) {
+    var valid: Boolean = false
+    var version: ByteArray? = null
 
     internal var output: MutableMap<String, String> = HashMap()
 
