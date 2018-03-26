@@ -1,1 +1,6 @@
 language: java
+
+before_install:
+ - chmod +x gradlew
+ 
+install: gradle build
