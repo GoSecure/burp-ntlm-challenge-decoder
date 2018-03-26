@@ -9,7 +9,9 @@ import java.util.*
 
 object FormatUtils {
 
-    internal inline fun NTLMString(raw: ByteArray, length: Short, maxLength: Short, offset: Int): String {
+    val FILETIME_OFFSET = 11644473600L
+
+    internal inline fun ntlmString(raw: ByteArray, length: Short, maxLength: Short, offset: Int): String {
         val target = String(raw, offset, length.toInt()).toCharArray()
 
         //dealing with UTF-16
@@ -37,15 +39,13 @@ object FormatUtils {
                 .int
     }
 
-    internal inline fun win32FILETIMEtoEpoch(FILETIME: Long?): Long {
-        val FILETIME_OFFSET = 11644473600L
-        return FILETIME!! / 10000000 - FILETIME_OFFSET
+    internal inline fun win32FILETIMEtoEpoch(filetime: Long): Long {
+        return filetime / 10000000 - FILETIME_OFFSET
     }
 
 
-    internal inline fun win32FILETIMEtoDate(FILETIME: Long?): String {
-        val FILETIME_OFFSET = 11644473600L
-        val epoch = FILETIME!! / 10000000 - FILETIME_OFFSET
+    internal inline fun win32FILETIMEtoDate(filetime: Long): String {
+        val epoch = filetime / 10000000 - FILETIME_OFFSET
         val date = Date(epoch * 1000)
 
         val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
