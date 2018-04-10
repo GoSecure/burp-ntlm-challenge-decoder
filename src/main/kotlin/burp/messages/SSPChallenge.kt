@@ -1,6 +1,5 @@
 package burp.messages
 
-import burp.FormatUtils
 import java.nio.ByteBuffer
 import java.util.*
 
@@ -11,8 +10,15 @@ class SSPChallenge(SSPHeader: ByteArray) : SSPMessage(SSPHeader) {
         parseFlags() // 4 bytes
         parseChallenge() // 8 bytes
         parseTargetInfo() // 8 bytes
+        parseVersion()
     }
 
+    private fun parseVersion() {
+        val majorVersion = raw[48]
+        val minorVersion = raw[49]
+
+        this.output.put("Version", FormatUtils.windowsVersion(majorVersion.toInt(),minorVersion.toInt()))
+    }
 
     private fun parseTarget() {
         val targetMessage = Arrays.copyOfRange(this.raw, 12, 20)
@@ -123,6 +129,6 @@ class SSPChallenge(SSPHeader: ByteArray) : SSPMessage(SSPHeader) {
     }
 
     override fun toString(): String {
-        return "SSP Challenge message"
+        return "SSP Challenge message\n"+super.toString()
     }
 }

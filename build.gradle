@@ -14,13 +14,6 @@ buildscript {
     }
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
-}
 
 repositories {
     mavenCentral()
@@ -30,6 +23,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     compile 'net.portswigger.burp.extender:burp-extender-api:1.7.22'
+
+    testCompile "org.testng:testng:6.9.10"
 }
 
 jar {
