@@ -1,4 +1,4 @@
-# burp-ssp-decoder
+# Burp NTLM Challenge Decoder
 
 ![Burp SSP Decoder](/images/version_1.png)
 

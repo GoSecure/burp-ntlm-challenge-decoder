@@ -10,7 +10,7 @@ class BurpExtender : IBurpExtender, IMessageEditorTabFactory {
         this.callbacks = callbacks
         helpers = callbacks.helpers
 
-        callbacks.setExtensionName("NTLM SSP Decoder")
+        callbacks.setExtensionName("NTLM Challenge Decoder")
 
         callbacks.registerMessageEditorTabFactory(this)
     }
