@@ -1,6 +1,6 @@
 # Burp NTLM Challenge Decoder
 
-[![Build Status](https://travis-ci.org/GoSecure/burp-ssp-decoder.svg?branch=master)](https://travis-ci.org/GoSecure/burp-ssp-decoder)
+[![Build Status](https://travis-ci.org/GoSecure/burp-ntlm-challenge-decoder.svg?branch=master)](https://travis-ci.org/GoSecure/burp-ntlm-challenge-decoder)
 
 ![Burp SSP Decoder](/images/version_1.png)
 
