@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/GoSecure/burp-ntlm-challenge-decoder.svg?branch=master)](https://travis-ci.org/GoSecure/burp-ntlm-challenge-decoder)
 
-![Burp SSP Decoder](/images/version_1.png)
+![Burp SSP Decoder](/images/version_finale.gif)
 
 Burp extension to decode NTLM SSP headers. NTLM challenges over HTTP allows us to decode interesting information about a server, such as:
 - The server's hostname
