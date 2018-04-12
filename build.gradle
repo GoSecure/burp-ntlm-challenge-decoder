@@ -23,6 +23,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     compile 'net.portswigger.burp.extender:burp-extender-api:1.7.22'
+    compile 'com.esotericsoftware:minlog:1.3'
 
     testCompile "org.testng:testng:6.9.10"
 }

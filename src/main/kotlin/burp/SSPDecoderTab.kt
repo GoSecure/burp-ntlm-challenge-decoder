@@ -1,6 +1,8 @@
 package burp
 
 import burp.messages.SSPMessageFactory
+import burp.ui.PropertyPanel
+import burp.ui.PropertyPanelController
 import java.awt.Component
 import java.io.IOException
 import javax.xml.bind.DatatypeConverter
@@ -8,8 +10,13 @@ import javax.xml.bind.DatatypeConverter
 /**
  * Tab component display under the Request and Response tab
  */
-class SSPDecoderTab(val controller: IMessageEditorController, private val editable: Boolean, val callbacks: IBurpExtenderCallbacks, val helpers: IExtensionHelpers) : IMessageEditorTab {
+class SSPDecoderTab(val controller: IMessageEditorController,
+                    private val editable: Boolean,
+                    val callbacks: IBurpExtenderCallbacks,
+                    val helpers: IExtensionHelpers) : IMessageEditorTab {
 
+
+    private val propertyPanel = PropertyPanel(PropertyPanelController())
     private val txtInput: ITextEditor
     private var sspHeaderValue: String? = null
 
@@ -25,7 +32,8 @@ class SSPDecoderTab(val controller: IMessageEditorController, private val editab
     }
 
     override fun getUiComponent(): Component {
-        return txtInput.component
+        //return txtInput.component
+        return propertyPanel.component
     }
 
 
@@ -33,8 +41,10 @@ class SSPDecoderTab(val controller: IMessageEditorController, private val editab
         var enabled = false
 
         if (isRequest) {
-            val httpInfo = helpers.analyzeRequest(content)
-            this.sspHeaderValue = httpInfo.getHeader("Authorization")
+            //val httpInfo = helpers.analyzeRequest(content)
+            //this.sspHeaderValue = httpInfo.getHeader("Authorization")
+            //At the moment, the request header 'Authorization' is not supported.
+            return false
         } else {
             val httpInfo = helpers.analyzeResponse(content)
             this.sspHeaderValue = httpInfo.getHeader("WWW-Authenticate")
@@ -52,13 +62,14 @@ class SSPDecoderTab(val controller: IMessageEditorController, private val editab
 
         val outputMap = sspMessage.output
 
-
+        propertyPanel.clearProperties()
         var outputString = StringBuilder()
         for ((key, value) in outputMap) {
             outputString.append("$key: $value\n")
+            propertyPanel.addProperty(key, value)
         }
 
-        txtInput.text = outputString.toString().toByteArray()
+        //txtInput.text = outputString.toString().toByteArray()
     }
 
     override fun getMessage(): ByteArray? {
