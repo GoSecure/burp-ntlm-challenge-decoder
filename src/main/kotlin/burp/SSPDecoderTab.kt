@@ -33,6 +33,7 @@ class SSPDecoderTab(val controller: IMessageEditorController,
 
     override fun getUiComponent(): Component {
         //return txtInput.component
+        callbacks.customizeUiComponent(propertyPanel.component)
         return propertyPanel.component
     }
 
