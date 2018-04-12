@@ -1,8 +1,8 @@
 # Burp NTLM Challenge Decoder
 
-![Burp SSP Decoder](/images/version_1.png)
-
 [![Build Status](https://travis-ci.org/GoSecure/burp-ssp-decoder.svg?branch=master)](https://travis-ci.org/GoSecure/burp-ssp-decoder)
+
+![Burp SSP Decoder](/images/version_1.png)
 
 Burp extension to decode NTLM SSP headers. NTLM challenges over HTTP allows us to decode interesting information about a server, such as:
 - The server's hostname
@@ -16,7 +16,7 @@ Burp extension to decode NTLM SSP headers. NTLM challenges over HTTP allows us t
 
 `$ gradle build`
 
-The compiled plugin is located at `build/libs/burp-ssp-decoder.jar`
+The compiled plugin is located at `build/libs/burp-ntlm-challenge-decoder.jar`
 
 # Sources, credits
 - https://winprotocoldoc.blob.core.windows.net/productionwindowsarchives/MS-NLMP/[MS-NLMP].pdf
