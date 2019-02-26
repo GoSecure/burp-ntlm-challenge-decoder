@@ -10,4 +10,4 @@ jdk:
 before_install:
  - chmod +x gradlew
  
-install: gradle build
+install: ./gradlew build
