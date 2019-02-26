@@ -5,7 +5,6 @@ import burp.ui.PropertyPanel
 import burp.ui.PropertyPanelController
 import java.awt.Component
 import java.io.IOException
-import javax.xml.bind.DatatypeConverter
 
 /**
  * Tab component display under the Request and Response tab
@@ -58,7 +57,7 @@ class SSPDecoderTab(val controller: IMessageEditorController,
     }
 
     override fun setMessage(content: ByteArray, isRequest: Boolean) {
-        val rawSSPHeader = DatatypeConverter.parseBase64Binary(this.sspHeaderValue)
+        val rawSSPHeader = helpers.base64Decode(this.sspHeaderValue)
         val sspMessage = SSPMessageFactory.getMessage(rawSSPHeader)
 
         val outputMap = sspMessage.output
