@@ -2,10 +2,10 @@ language: java
 
 # Compatibility tests to make sure API will not be deprecated
 jdk:
-  - oraclejdk8
-  - oraclejdk9
+  - openjdk8
+  - openjdk9
   - openjdk10
-  - oraclejdk11 
+  - openjdk11
 
 before_install:
  - chmod +x gradlew
