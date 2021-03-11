@@ -18,7 +18,10 @@ Burp extension to decode NTLM SSP headers. NTLM challenges over HTTP allows us t
 
 The compiled plugin is located at `build/libs/burp-ntlm-challenge-decoder.jar`
 
+[Download the precompiled jar](release/burp-ntlm-challenge-decoder.jar)
+
 # Sources, credits
+
 - https://winprotocoldoc.blob.core.windows.net/productionwindowsarchives/MS-NLMP/[MS-NLMP].pdf
 - http://msdn.microsoft.com/en-us/library/cc236621.aspx
 - https://gist.github.com/aseering/829a2270b72345a1dc42
