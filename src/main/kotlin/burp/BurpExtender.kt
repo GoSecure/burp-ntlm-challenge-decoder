@@ -35,7 +35,7 @@ class BurpExtender : IBurpExtender, IMessageEditorTabFactory {
         callbacks.registerMessageEditorTabFactory(this)
     }
 
-    override fun createNewInstance(controller: IMessageEditorController, editable: Boolean): IMessageEditorTab {
+    override fun createNewInstance(controller: IMessageEditorController?, editable: Boolean): IMessageEditorTab {
         // create a new instance of our custom decoder tab
         return SSPDecoderTab(controller, editable,callbacks,helpers)
     }

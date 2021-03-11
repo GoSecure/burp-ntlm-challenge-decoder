@@ -9,7 +9,7 @@ import java.io.IOException
 /**
  * Tab component display under the Request and Response tab
  */
-class SSPDecoderTab(val controller: IMessageEditorController,
+class SSPDecoderTab(val controller: IMessageEditorController?,
                     private val editable: Boolean,
                     val callbacks: IBurpExtenderCallbacks,
                     val helpers: IExtensionHelpers) : IMessageEditorTab {
