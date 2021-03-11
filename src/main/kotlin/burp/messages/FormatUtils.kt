@@ -28,7 +28,7 @@ object FormatUtils {
         if(majorVersion == 6) return "Windows Server 2012 R2 / Windows 8.1"
         if(majorVersion == 10) return "Windows Server 2016 / Windows 10 (Unsure)"
 
-        return "Version"
+        return "Unknown (Major: $majorVersion, Minor: $minorVersion)"
     }
 
     internal inline fun ntlmString(raw: ByteArray, length: Short, maxLength: Short, offset: Int): String {
